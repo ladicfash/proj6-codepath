@@ -69,7 +69,7 @@ const Dashboard = () => {
           <option value="spanish">Spanish</option>
           <option value="thai">Thai</option>
           <option value="vietnamese">Vietnamese</option>
-
+          {/* Add more cuisines as needed */}
         </select>
         <select value={diet} onChange={(e) => setDiet(e.target.value)}>
           <option value="">All Diets</option>
@@ -89,6 +89,7 @@ const Dashboard = () => {
           <option value="low carb">Low Carb</option>
           <option value="low fat">Low Fat</option>
           <option value="low sodium">Low Sodium</option>
+          {/* Add more diets as needed */}
         </select>
         <input 
           type="number" 
