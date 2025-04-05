@@ -1,57 +1,60 @@
-import React, { useEffect, useState } from 'react';
+import React, {UseEffect, useEffect, useState} from 'react';
 import axios from 'axios';
-import './Dashboard.css';
+import'./Dashboard.css';
 
 const Dashboard = () => {
-  const [events, setEvents] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filter, setFilter] = useState('');
+    const[recipes, setRecipes] = useState([])
+    const[searchQuery, setSearchQuery] = useState([])
+    const[filter, setFilter] = useState([])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get('https://api.seatgeek.com/2/events', {
-        params: {
-          client_id: import.meta.env.VITE_SEATGEEK_CLIENT_ID
+    useEffect = () => {
+        const fetchData = async () => {
+            const response = await axios.get()
+            params: {
+                apikey: import.meta.env.VITE_SPOONACULAR_API_KEY
+                number: 10
+            }
+
         }
-      });
-      setEvents(response.data.events);
-    };
+        setRecipes(response.data.results);
 
-    fetchData();
-  }, []);
 
-  const filteredEvents = events.filter(event =>
-    event.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
-    event.genre.toLowerCase().includes(filter.toLowerCase())
-  );
 
-  return (
-    <div className="dashboard">
-      <h1>Live Events Dashboard</h1>
-      <input 
-        type="text" 
-        placeholder="Search..." 
-        value={searchQuery} 
-        onChange={(e) => setSearchQuery(e.target.value)} 
-      />
-      <select onChange={(e) => setFilter(e.target.value)}>
-        <option value="">All Genres</option>
+    }
 
-      </select>
-      <div>
-        <p>Total events: {events.length}</p>
-      </div>
-      <ul>
-        {filteredEvents.map(event => (
-          <li key={event.id}>
-            <h2>{event.title}</h2>
-            <p>{event.venue.name}</p>
-            <p>{event.datetime_local}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+        fetchData();
+}
+    const filteredRecipes = recipes.filter(recipe => 
+        reciple.title.tolowerCase().includes(searchQuery.tolowerCase()) && 
+        (filter ? recipe.diets.includes(filter): true)
+        );
 
+        return (
+            <div className="dashboard"> <h1>Recipe Dashboard</h1>
+            <input 
+                type="text" 
+                placeholder="Search..." 
+                value={searchQuery} 
+                onChange={(e) => setSearchQuery(e.target.value)} /> <select onChange={(e) => setFilter(e.target.value)}>
+                <option value="">All Diets</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="vegan">Vegan</option>
+                <option value="gluten free">Gluten Free</option>
+                <option value="ketogenic">Ketogenic</option>
+            </select>
+            <div>
+                <p>Total recipes: {recipes.length}</p>
+            </div>
+            <ul>
+                {filteredRecipes.map(recipe => (
+                <li key={recipe.id}>
+                    <h2>{recipe.title}</h2>
+                    <img src={recipe.image} alt={recipe.title} />
+                </li>
+                ))}
+            </ul>
+            </div>
+        );
+        
 export default Dashboard;
+
